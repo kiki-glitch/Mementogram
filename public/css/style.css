@@ -1,0 +1,49 @@
+*{
+
+	font-family: 'Poppins', sans-serif;
+}
+
+nav ul li a{
+	color: black;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+nav ul li a:hover{
+	content: '';
+	width: 0%;
+	height: 2px;
+	background: #ffff;
+	dispaly: block;
+	margin: auto;
+	transition: 0.5s;
+
+}
+
+nav ul li a:hover{
+
+	color: orange;
+	text-decoration: none;
+	font-size: 17px;
+	transition: 0.5s;
+}
+
+.hero-btn{
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+	border: 1px solid #fff;
+	padding: 12px 34px;
+	font-size: 13px;
+	position: relative;
+	background: #f44336;
+	cursor: pointer;
+	border-radius: 5%;
+
+}
+
+.hero-btn:hover{
+	border: 1px solid #f44336;
+	background: #f44336;
+	transition: 1s;
+}
