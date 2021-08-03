@@ -34,7 +34,7 @@
 				<div class="mb-4">
 					<label for="password" class="sr-only">Password
 					</label>
-					<input type="password" name="password" id="password" placeholder="Choose a password" class="bg-gray-100 borer-2 w-full p-4 rounded-lg" value="">
+					<input type="password" name="password" id="password" placeholder="Enter password" class="bg-gray-100 borer-2 w-full p-4 rounded-lg" value="">
 
 					
 
@@ -58,7 +58,7 @@
 				</div>
 
 
-				<div class="px-20 mb-4 text-blue-400 ">
+				<div class="text-center mb-4 text-blue-400 ">
 					<a href="{{ route('request') }}" class="hover:underline">Forgot password</a>
 
 				</div>

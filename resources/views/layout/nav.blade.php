@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>Navbar</title>
 
@@ -15,21 +16,24 @@
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
-	<!--Bootstrap
-
+	<!--
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+	
 
 </head>
 <body class="bg-gray-100">
-		<nav class="p-6 bg-white flex justify-between mb-6">
+		<nav class="p-6 bg-white flex justify-between ">
 			<ul class="flex items-center">
 				<li>
 					<a href="" class="p-3 ">Home</a>
 				</li>
 				<li>
 					<a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
+				</li>
+				<li>
+					<a href="{{url('portfolio')}}" class="p-3">Portfolio</a>
 				</li>
 				<li>
 					<a href=" " class="p-3">Hiquip</a>
@@ -65,6 +69,9 @@
 
 
 		@yield('content')
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
 

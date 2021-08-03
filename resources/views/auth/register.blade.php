@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="mb-4">
-					<label for="last_name" class="sr-only">First name
+					<label for="last_name" class="sr-only">Last name
 					</label>
 					<input type="text" name="last_name" id="last_name" placeholder="Last name" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('last_name')}}">
 
