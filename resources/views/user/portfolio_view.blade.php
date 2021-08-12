@@ -89,9 +89,15 @@
 			<img src="/upload/portfolios/{{ $portfolio['media'] }}" alt="" class=" ">
 			<h2 class="text-left px-2 pb-5">Description:{{ $portfolio['description'] }}<h2>
 			<h2 class="bg-blue-500 text-white p-3 text-left">Time created:<span class="text-gray-600 text-sm">{{ $portfolio->created_at->diffForHumans() }}</span></h2>
+			@if($portfolio['deleted_at'] == null)
 			<a href="{{ "edit/".$portfolio['id'] }}" class="bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-6 py-2 m-2 float-left">Edit</a>
-			<a href="{{ "delete/".$portfolio['id'] }}" onclick="return confirm('Are You Sure You want to Delete?')" class="bg-red-500 text-white hover:bg-red-600 rounded-lg px-6 py-2 m-2 float-right">Delete</a>
+			<a href="{{ "disable/".$portfolio['id'] }}" onclick="return confirm('Are You Sure You want to Disable Your Portfolio?')" class="bg-red-500 text-white hover:bg-red-600 rounded-lg px-6 py-2 m-2 float-right">Disable</a>
 			</div>
+			@else
+			<a href="{{ "restore/".$portfolio['id'] }}" class="bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-6 py-2 m-2 float-left">Restore</a>
+			<a href="{{ "force_delete/".$portfolio['id'] }}" onclick="return confirm('Are You Sure You want to Delete?')" class="bg-red-500 text-white hover:bg-red-600 rounded-lg px-6 py-2 m-2 float-right">Delete</a>
+			</div>
+			@endif
 		@endforeach
 		@else
 

@@ -15,7 +15,11 @@ use File;
 
 class UserController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+ 
+    }
     public function edit(){
 
         if(Auth::user()){

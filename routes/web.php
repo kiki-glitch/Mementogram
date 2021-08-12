@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminControleer;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -17,6 +18,30 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/admin/user/view/', [AdminControleer::class, 'user_view'])->name('admin_user.view');
+Route::get('/admin/add user/view/', [AdminControleer::class, 'adduser_view'])->name('add_user');
+Route::get('/admin/user/portfolios/', [AdminControleer::class, 'portfolios_view'])->name('portfolios.view');
+Route::get('/admin/user/social links/', [AdminControleer::class, 'sociallinks_view'])->name('usersocials.view');
+Route::get('/admin/reset/password/user/{id}/', [AdminControleer::class, 'passwordEdit'])->name('userpassword.edit');
+Route::post('/admin/edit/password/user/', [AdminControleer::class, 'passwordUpdate'])->name('userpasswordChange.update');
+Route::get('/admin/delete/password/user/{id}/', [AdminControleer::class, 'user_delete'])->name('user.softdelete');
+Route::get('/admin/restore/password/user/{id}/', [AdminControleer::class, 'user_restore'])->name('user.restore');
+Route::get('/admin/permanent/delete/password/user/{id}/', [AdminControleer::class, 'user_forcedelete'])->name('user.forcedelete');
+
+Route::get('/admin/edit/user/{id}/', [AdminControleer::class, 'editUserView'])->name('admin.editUserView');
+Route::post('/admin/update/profile/user/', [AdminControleer::class, 'adminUser_update'])->name('adminUser.update');
+Route::get('/admin/delete/portfilio/user/{id}/', [AdminControleer::class, 'portfolio_delete'])->name('user.softdelete');
+Route::get('/admin/delete/sociallinks/user/{id}/', [AdminControleer::class, 'sociallinks_delete'])->name('sociallinks.softdelete');
+Route::get('/admin/restore/sociallinks/user/{id}/', [AdminControleer::class, 'sociallinks_restore'])->name('sociallinks.restore');
+Route::get('/admin/restore/portfolio/user/{id}/', [AdminControleer::class, 'portfolio_restore'])->name('portfolio.restore');
+Route::get('/admin/permanent/delete/sociallinks/user/{id}/', [AdminControleer::class, 'sociallink_forcedelete'])->name('sociallinks.forcedelete');
+Route::get('/admin/permanent/delete/portfolio/user/{id}/', [AdminControleer::class, 'portfolios_forcedelete'])->name('portfolios.forcedelete');
+Route::post('/admin/add/user', [AdminControleer::class, 'add_user'])->name('add.user');
+Route::post('/admin/edit/useravatar', [AdminControleer::class, 'edit_useravatar'])->name('admin.user.avatarupdate');
+Route::post('/admin/edit/user_description', [AdminControleer::class, 'edit_user_description'])->name('admin.user.user_description');
+
+
 
 
 Route::get('/profile/', [UserController::class, 'profile'])->name('user.profile');
@@ -29,7 +54,9 @@ Route::post('/portfolio/submit/socials', [PortfolioController::class, 'socials']
 
 Route::get('/portfolio/view/', [PortfolioController::class, 'portflio_view'])->name('portfolio.view');
 Route::get('/portfolio/edit/{id}/', [PortfolioController::class, 'portflio_edit'])->name('portfolio.edit');
-Route::get('/portfolio/delete/{id}/', [PortfolioController::class, 'portflio_delete'])->name('portfolio.delete');
+Route::get('/portfolio/disable/{id}/', [PortfolioController::class, 'portflio_delete'])->name('portfolio.delete');
+Route::get('/portfolio/restore/{id}/', [PortfolioController::class, 'portflio_restore'])->name('portfolio.delete');
+Route::get('/portfolio/force_delete/{id}/', [PortfolioController::class, 'portflio_forcedelete'])->name('portfolio.delete');
 Route::post('/portfolio/view/update/', [PortfolioController::class, 'portfolio_update'])->name('portfolio.update');
 
 Route::get('/portfolio/socials/view/', [PortfolioController::class, 'socials_view'])->name('socials.view');

@@ -17,7 +17,11 @@ use Session;
 class PortfolioController extends Controller
 {
 
-
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+ 
+    }
     public function add(Request $request){
 
         $this->validate($request,
@@ -85,8 +89,9 @@ class PortfolioController extends Controller
     public function portflio_view(){
 
         $user = Auth::user();
-
-        $portfolios = Portfolio::where('user_id',$user->id)->get();
+        $user = Auth::user();
+         $portfolios = Portfolio::withTrashed()->paginate(5);
+         $portfolios = Portfolio::where('user_id',$user->id)->withTrashed()->get();
 
         return view('user.portfolio_view',['portfolios'=>$portfolios])->withUser($user);
 
@@ -146,9 +151,26 @@ class PortfolioController extends Controller
         $portfolios = Portfolio::find($id);
         $portfolios->delete();
 
-        Session::flash('msg','Portfolio successfully deleted');
+        Session::flash('msg','Portfolio successfully Disabled');
         return redirect()->back();
     }
+    public function portflio_restore($id){
+
+        $portfolios = Portfolio::withTrashed()->find($id);
+        $portfolios->restore();
+
+        Session::flash('msg','Portfolio successfully Restored');
+        return redirect()->back();
+    }
+     public function portflio_forcedelete($id){
+
+        $portfolios = Portfolio::onlyTrashed()->find($id);
+        $portfolios->forceDelete();
+
+        Session::flash('msg','Portfolio successfully Permanently Deleted');
+        return redirect()->back();
+    }
+
     public function portfolio_update(Request $request){
 
         $user = Auth::user();

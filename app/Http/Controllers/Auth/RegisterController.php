@@ -24,18 +24,20 @@ class RegisterController extends Controller
             ['first_name'=> 'required|max:255',
             'last_name'=> 'required|max:255', 
              'username'=> 'required|max:255',
-              'email'=> 'required|email|max:255',
+              'email'=> 'required|email|unique:users|max:255',
               'password'=> 'required|confirmed' 
 
             ]);     
         //store user
-        User::create([
+       $user = User::create([
             'First_name'=> $request->first_name,
             'Last_name'=> $request->last_name,
             'username'=> $request->username,
             'email'=> $request->email,
             'password'=> Hash::make($request->password),
         ]);
+
+       $user->attachRole('user');
 
         auth()->attempt($request->only('email','password'));
 

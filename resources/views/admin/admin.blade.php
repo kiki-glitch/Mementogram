@@ -2,16 +2,6 @@
 
 @section('content')
 
-	
-	
-	<!--<div class="flex justify-center">
-		<div class="w-8/12 bg-white p-6 rounded-lg">
-			Dashboard
-		</div>
-	</div>-->
-
-
-
 	<div class="relative min-h-screen flex">
 
 	<!--sidebar-->
@@ -28,11 +18,11 @@
 	<!--nav-->
 
 		<nav>
-			<a href="{{ route('user.profile')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">My Account</a>
-			<a href="{{ route('portfolio') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Edit portfolio</a>
-			<a href="{{ route('user.edit')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Edit profile</a>
-			<a href="{{ route('password.edit')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Change Password</a>
-			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Public View</a>
+			<a href="{{ route('admin_user.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Users View</a>
+			<a href="{{ route('portfolios.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400"> Portfolios View</a>
+			<a href="{{ route('usersocials.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">User Socials View</a>
+			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Hiquip</a>
+			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Portfolios</a>
 			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Settings</a>
 			<form action="{{ route('logout') }}" method="post" class="p-3 inline">
 						@csrf
@@ -50,21 +40,24 @@
 		
 		<div class="flex justify-center">
 		
-			<div class="w-8/12 bg-white p-6 rounded-lg">
-			User Dashboard Page
+		<div class="w-8/12 bg-white p-6 rounded-lg">
+			Admin Page
 		</div>
 	</div>
 		
-
-	</div>
-		
 		
 
 	</div>
+	
 		
+
+	</div>
+		</div>
+	
 	
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	 
 
 @endsection
+

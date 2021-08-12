@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
 class DashboardController extends Controller
@@ -16,9 +17,15 @@ class DashboardController extends Controller
     }
     public function index(){
 
-        $user = auth()->user();
+       // $user = auth()->user();
         
+        if(Auth::user()->hasRole('user'))
+        {
         return view('dashboard');
+        }
+        elseif(Auth::user()->hasRole('admin')){
+            return view('admin.admin');
+        }
     }
     public function userportfolio(){
         
