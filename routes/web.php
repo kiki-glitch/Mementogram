@@ -8,16 +8,27 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HiquipController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminControleer;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\PortfolioHubController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/contact/', [ContactController::class, 'contact_form'])->name('contact');
+
+Route::get('/hiquip/', [HiquipController::class, 'hiquipview'])->name('hiquip');
+Route::get('/hiquip/product/productid/', [HiquipController::class, 'hiquipview_product'])->name('hiquip.product');
+
+
+
+
 
 Route::get('/admin/user/view/', [AdminControleer::class, 'user_view'])->name('admin_user.view');
 Route::get('/admin/add user/view/', [AdminControleer::class, 'adduser_view'])->name('add_user');
@@ -45,7 +56,10 @@ Route::post('/admin/edit/user_description', [AdminControleer::class, 'edit_user_
 
 
 Route::get('/profile/', [UserController::class, 'profile'])->name('user.profile');
-Route::get('/portfolio', [UserController::class, 'userportfolio'])->name('portfolio');
+
+
+Route::get('/portfoliohub/', [PortfolioHubController::class, 'userportfolio'])->name('portfoliohub');
+Route::get('/portfoliohub/view/', [PortfolioHubController::class, 'portfoliohub_view'])->name('portfoliohub.view');
 
 Route::post('/portfolio/submit', [PortfolioController::class, 'add'])->name('media.portfolio');
 Route::post('/portfolio/submit/socials', [PortfolioController::class, 'socials'])->name('media.links');

@@ -152,7 +152,7 @@
                 <a href="{{ "/admin/edit/user/".$user['id'] }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="{{ "/admin/delete/password/user/".$user['id'] }}" onclick="return confirm('Are You Sure You want to Delete User?')" class="text-red-500 hover:text-red-600">Delete</a>
+                <a href="{{ "/admin/delete/password/user/".$user['id'] }}" onclick="return confirm('Are You Sure You want to Delete User?')" class="text-red-500 hover:text-red-600">Disable User</a>
               </td>
             </tr>
 
