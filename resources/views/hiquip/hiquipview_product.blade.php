@@ -34,16 +34,16 @@
 		<nav class="p-6 bg-white flex justify-between ">
 			<ul class="flex items-center">
 				<li>
-					<a href="/" class="p-3 ">Home</a>
+					<a href="/" class="p-3 hover:text-blue-500">Home</a>
 				</li>
 				<li>
-					<a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
+					<a href="{{ route('dashboard') }}" class="p-3 hover:text-blue-500">Dashboard</a>
 				</li>
 				<li>
-					<a href="{{url('portfoliohub')}}" class="p-3">Portfolio</a>
+					<a href="{{url('portfoliohub')}}" class="p-3 hover:text-blue-500">Portfolio</a>
 				</li>
 				<li>
-					<a href="{{ route('hiquip') }}" class="p-3">Hiquip</a>
+					<a href="{{ route('hiquip') }}" class="p-3 hover:text-blue-500">Hiquip</a>
 				</li>
 				
 			</ul>
@@ -51,7 +51,7 @@
 			<ul class="flex items-center">
 				@auth
 					<li>
-					<a href="" class="p-3">{{ auth()->user()->username }}</a>
+					<a href="" class="p-3 hover:text-blue-500">{{ auth()->user()->username }}</a>
 					</li>
 
 					<li>
@@ -78,14 +78,14 @@
 				
 				@guest
 				<li>
-					<a href="{{ route('login') }}" class="p-3">Sign in</a>
+					<a href="{{ route('login') }}" class="p-3 hover:text-blue-500">Sign in</a>
 				</li>
 				<li>
-					<a href="{{ route('register') }}" class="p-3">Sign up</a>
+					<a href="{{ route('register') }}" class="p-3 hover:text-blue-500">Sign up</a>
 				</li>
 				@endguest
 				
-				<li><a><i class="fas fa-shopping-cart"></i></a></li>
+				<li><a><i class="fas fa-shopping-cart hover:text-blue-500"></i></a></li>
 			</ul>
 		</nav>
 
@@ -93,35 +93,66 @@
 		<div class="relative min-h-screen flex">
 
 	<!--sidebar-->
-	<div class="bg-gray-500 text-black-100 w-64 space-y-6 px-4">
-	<!--logo-->
+	<div class="w-64 h-screen bg-gray-900 rounded-md overflow-y-scroll ">
+	
+	<nav>
+	<div class="">
+		<div class="pc-6 pt-8">
+		<div class="flex items-center justify-between">
+			<a href="#" class="bg-blue-600 p-1.5 rounded flex items-center justify-center">Mementogram</a>
+			
+			<button class="flex items-center justify-center p-8.5 rounded bg-gray-800"><i class="fas fa-arrow-left"></i></button>
+		</div>	
+
+	</div>
+	<div class="px-6 pt-4">
 		
+	</div>
 
-		<a href="" class="text-white flex items-center space-x-2">
-			logo
-		</a>
+	<div class="px-6 pt-4 ">
+		<hr class="border-gray-700">
+	</div>
+	<div class="px-6 pt-4">
 
-		<span class="text-2xl">Mementogram</span>
+		<ul class="flex flex-col space-y-2 ">
+			<li class="relative text-gray-500 hover:text-white focus-within:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-camera w-5 h-5 stroke-current"></i></div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2 rounded text-xs hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:bg-gray-800">Camera</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					
+					<i class="fas fa-video h-5 stroke-current"></i></div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2  rounded text-xs hover:bg-gray-800">Video</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-microphone w-5 h-5 stroke-current"></i>
 
-	<!--nav-->
+				</div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2 rounded text-xs hover:bg-gray-800">Sound</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-box w-5 h-5 stroke-current"></i>
+				</div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2  rounded text-xs hover:bg-gray-800">Packages</a>
+			</li>				
+		</ul>
+	</div>
+	
+	</div>
 
-		<nav>
-			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Camera</a>
-			<a href="{{ route('portfolios.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400"> Sound Equip</a>
-			<a href="{{ route('usersocials.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Microphone</a>
-			<form action="{{ route('logout') }}" method="post" class="p-3 inline">
-						@csrf
-						<button type="submit" class="block py-2.5 px-4" >Logout</button>
-					</form>
-		</nav>
+</nav>
+	
 
+			<!--end of navbar-->
 
-
-	</div>		
-
+</div>
 	<!--content-->
 
-	<div class="flex-1 p-10  font-bold">
+	<div class="flex-1 p-10 font-bold">
 		
 		<div class="py-24 flex items-center justify-center">
 			

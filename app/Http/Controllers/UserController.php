@@ -186,6 +186,13 @@ class UserController extends Controller
             return redirect()->back();
         }
     }*/
+    public function userportfolio(){
+
+        $user = Auth::user();
+        return view('user.portfolio')->withUser($user);
+
+    }
+    
     public function description_update(Request $request){
 
         $user = User::find(Auth::user()->id);

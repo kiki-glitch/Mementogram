@@ -88,7 +88,7 @@ class PortfolioController extends Controller
     }
     public function portflio_view(){
 
-        $user = Auth::user();
+        
         $user = Auth::user();
          $portfolios = Portfolio::withTrashed()->paginate(5);
          $portfolios = Portfolio::where('user_id',$user->id)->withTrashed()->get();

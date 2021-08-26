@@ -30,10 +30,10 @@
 
 </head>
 <body class="bg-gray-100">
-		<nav class="p-6 bg-white flex justify-between mb-5">
+		<nav class="p-6 bg-white flex justify-between">
 			<ul class="flex items-center">
 				<li>
-					<a href="/" class="p-3 ">Home</a>
+					<a href="/" class="p-3 hover:text-blue-500">Home</a>
 				</li>
 				<li>
 					<a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>

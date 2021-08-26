@@ -12,18 +12,23 @@ use Illuminate\Support\Facades\Auth;
 use Image;
 use File;
 use Session;
+use DB;
 
 class PortfolioHubController extends Controller
 {
     
     public function userportfolio(){
 
-        $user = Auth::user();
-        return view('portfoliohub.portfoliohub')->withUser($user);
+        
+       //$users = User::hasRole('user')->get();
+       // $users = User::with('role_user')->join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_user.id', '2')->get();
+        $users = User::whereHas('roles', function($q){$q->whereIn('name', ['user']);})->get();
+        return view('portfoliohub.portfoliohub',['users'=>$users]);
     }
-    public function portfoliohub_view(){
+    public function portfoliohub_view($id){
 
-        $user = Auth::user();
-        return view('portfoliohub.portfoliohub_view')->withUser($user);
+        $users = User::find($id);
+        $portfolios = Portfolio::where('user_id', '=', $id)->get();
+        return view('portfoliohub.portfoliohub_view',['users'=>$users],['portfolios'=>$portfolios]);
     }
 }

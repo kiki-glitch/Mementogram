@@ -4,7 +4,7 @@
 	list-style: none;
 }
 
-nav ul li a{
+/*nav ul li a{
 	color: black;
 	text-decoration: none;
 	font-size: 17px;
@@ -28,7 +28,7 @@ nav ul li a:hover{
 	font-size: 17px;
 	transition: 0.5s;
 }
-
+*/
 .hero-btn{
 	display: inline-block;
 	text-decoration: none;
@@ -82,7 +82,8 @@ body{
 }
 
 .view_item img{
-	width: 300px;
+	width: 100px;
+	border-radius: 20px;
 }
 
 .view_main{
@@ -331,8 +332,6 @@ button:active{
 .internalcontainerL{
 	flex: 1 0 25%; 
 	margin: 5px;
-	
-
 }
 
 @media screen and (max-width: 760px){

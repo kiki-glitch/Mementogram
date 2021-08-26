@@ -20,8 +20,14 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 
+
 Route::get('/dashboard/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/contact/', [ContactController::class, 'contact_form'])->name('contact');
+
+
+Route::get('/contact/{id}/', [ContactController::class, 'contact_form'])->name('contact');
+Route::get('/contact/success/')->name('contact.success');
+Route::post('/contact/', [ContactController::class, 'contact_form_save'])->name('contact.save');
+
 
 Route::get('/hiquip/', [HiquipController::class, 'hiquipview'])->name('hiquip');
 Route::get('/hiquip/product/productid/', [HiquipController::class, 'hiquipview_product'])->name('hiquip.product');
@@ -56,10 +62,10 @@ Route::post('/admin/edit/user_description', [AdminControleer::class, 'edit_user_
 
 
 Route::get('/profile/', [UserController::class, 'profile'])->name('user.profile');
-
+Route::get('/portfolio', [UserController::class, 'userportfolio'])->name('portfolio');
 
 Route::get('/portfoliohub/', [PortfolioHubController::class, 'userportfolio'])->name('portfoliohub');
-Route::get('/portfoliohub/view/', [PortfolioHubController::class, 'portfoliohub_view'])->name('portfoliohub.view');
+Route::get('/portfoliohub/view/user/{id}/', [PortfolioHubController::class, 'portfoliohub_view'])->name('portfoliohub.view');
 
 Route::post('/portfolio/submit', [PortfolioController::class, 'add'])->name('media.portfolio');
 Route::post('/portfolio/submit/socials', [PortfolioController::class, 'socials'])->name('media.links');
@@ -147,7 +153,7 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/', function () {
-  return view('posts.home');
+  return view('layout.sidebar');
 })->name('home');
 
 

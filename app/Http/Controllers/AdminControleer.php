@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Session;
-
+use DB;
 
 
 class AdminControleer extends Controller
@@ -28,12 +28,13 @@ class AdminControleer extends Controller
    public function user_view(){
 
         $user = Auth::user();
-        $users = User::withoutTrashed()->paginate(5);
+        //$users = User::withoutTrashed()->paginate(5);
         $trashes = User::onlyTrashed()->paginate(5);
-        
-         
-       
-        return view('admin.admin_userview2',['users'=>$users],['roles'=>Role::all()])->withUser($user)->with(['trashes'=>$trashes]);
+        $users = User::whereHas('roles', 
+            function($q){
+            $q->whereIn('name', ['user'])->orWhereIn('name', ['brand']);
+        })->withoutTrashed()->paginate(5);
+        return view('admin.admin_userview2',['users'=>$users])->withUser($user)->with(['trashes'=>$trashes]);
     }
 
     public function adduser_view(){
