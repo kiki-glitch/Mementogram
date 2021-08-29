@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Portfolio;
+use App\Models\Products;
 use App\Models\SocialLinks;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -87,6 +88,57 @@ class AdminControleer extends Controller
          
         return view('admin.admin_sociallinksview',['socials'=>$socials])->withUser($user);
     }
+    public function hiquip_view(){
+
+        $user = Auth::user();
+        //$products = Proucts::withTrashed()->paginate(5);
+        $products = Products::paginate(5);
+        $trashes = Products::paginate(5);
+        return view('admin.hiquipview',['products'=>$products],['trashes'=>$trashes])->withUser($user);
+    }
+
+    public function addproduct_view(){
+
+        $user = Auth::user();
+        $products = Products::all();
+        return view('admin.add_hiquip')->withUser($user)->with(['products'=>$products]);
+    }
+    public function addproduct(Request $request){
+
+        $this->validate($request,
+            ['product_name'=> 'required|max:255',
+            'category'=> 'required|max:255', 
+            'product_img'=>'required',
+             'description'=> 'required',
+              'price'=> 'required|integer', 
+
+            ]); 
+
+        //$newImageName = time() .  '.' . $request->product_img->extension();
+
+        //$request->product_img->move(public_path('upload/hiquip/'), $newImageName); 
+        
+
+        if($request->hasFile('product_img')){
+            $product_img = $request->file('product_img');
+            $filename = time() . '.' . $product_img->getClientOriginalExtension();
+            Image::make($product_img)->resize(400,400)->save( public_path('/upload/hiquip/' . $filename ) );   
+        }
+        //store product
+       $product = Products::create([
+            'product_img'=> $filename,
+            'name'=> $request->product_name,
+            'category'=> $request->category,
+            'description'=> $request->description,
+            'price'=> $request->price,
+        ]);
+
+        //dd($request);
+       Session::flash('success','Product added successfull');
+       return redirect()->back();
+    
+   } 
+
     public function passwordEdit($id){
 
          $user = Auth::user();

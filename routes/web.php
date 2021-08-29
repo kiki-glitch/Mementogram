@@ -30,9 +30,13 @@ Route::post('/contact/', [ContactController::class, 'contact_form_save'])->name(
 
 
 Route::get('/hiquip/', [HiquipController::class, 'hiquipview'])->name('hiquip');
-Route::get('/hiquip/product/productid/', [HiquipController::class, 'hiquipview_product'])->name('hiquip.product');
-
-
+Route::get('/hiquip/product/productid/{id}/', [HiquipController::class, 'hiquipview_product'])->name('hiquip.product');
+Route::get('/hiquip/add_to_cart/{product}/', [HiquipController::class, 'add_to_cart'])->name('cart.add')->middleware('auth');
+Route::get('/hiquip/cart/', [HiquipController::class, 'cart'])->name('cart.index')->middleware('auth');
+Route::get('/hiquip/cart/destroy/{itemId}/', [HiquipController::class, 'cart_destroy'])->name('cart.destroy')->middleware('auth');
+Route::post('/hiquip/cart/update/{itemId}/', [HiquipController::class, 'cart_update'])->name('cart.update')->middleware('auth');
+Route::get('/hiquip/cart/ceckout/', [HiquipController::class, 'checkout'])->name('cart.checkout');
+Route::post('/hiquip/cart/orders/', [HiquipController::class, 'checkout_order'])->name('orders.store')->middleware('auth');
 
 
 
@@ -40,6 +44,9 @@ Route::get('/admin/user/view/', [AdminControleer::class, 'user_view'])->name('ad
 Route::get('/admin/add user/view/', [AdminControleer::class, 'adduser_view'])->name('add_user');
 Route::get('/admin/user/portfolios/', [AdminControleer::class, 'portfolios_view'])->name('portfolios.view');
 Route::get('/admin/user/social links/', [AdminControleer::class, 'sociallinks_view'])->name('usersocials.view');
+Route::get('/admin/hiquip/view/', [AdminControleer::class, 'hiquip_view'])->name('admin.hiquip_view');
+Route::get('/admin/add product/view/', [AdminControleer::class, 'addproduct_view'])->name('add_product');
+Route::post('/admin/add product/', [AdminControleer::class, 'addproduct'])->name('add.product');
 Route::get('/admin/reset/password/user/{id}/', [AdminControleer::class, 'passwordEdit'])->name('userpassword.edit');
 Route::post('/admin/edit/password/user/', [AdminControleer::class, 'passwordUpdate'])->name('userpasswordChange.update');
 Route::get('/admin/delete/password/user/{id}/', [AdminControleer::class, 'user_delete'])->name('user.softdelete');

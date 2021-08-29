@@ -110,7 +110,7 @@
 
 					 	<input type="tel" name="phone" placeholder="Your Phone number" 
 					 	 class="ring-1 ring-gray-300 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-300" value="{{ old('phone')}}">
-					 	 <small>Format: 123-456-7890</small>
+					 	 <small>Format: 07-2456-7890</small>
 					 </div>
 					 @error('phone')
 						<div class="text-red-500 mt-2 text-sm">

@@ -84,18 +84,24 @@
 					<a href="{{ route('register') }}" class="p-3 hover:text-blue-500">Sign up</a>
 				</li>
 				@endguest
+
 				
 				<li>
-					<a href="{{ route('cart.index')}}">
+					<a>
 						<div class="flex flex-row space-x-2">
 						<div>	
 						<i class="fas fa-shopping-cart hover:text-blue-500">
 						</i>
 						</div>
-            			<div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xs px-3 bg-blue-500 text-white rounded-full">{{ \Cart::session(auth()->id())->getContent()->count() }}</div>
+            			<div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xs px-3 bg-blue-500 text-white rounded-full">
+            			@auth
+            				{{ \Cart::session(auth()->id())->getContent()->count() }}
+            			@endauth
+            			</div>
             		</div>
 				</a>
-			</li>
+				</li>
+
 			</ul>
 		</nav>
 
@@ -163,40 +169,124 @@
 	<!--content-->
 
 	<div class="flex-1 p-10 font-bold">
-		
-		<div class="py-24 flex items-center justify-center">
-			
-		<!--card goes here-->
 
-		<div class="bg-white rounded-lg shadow-2xl w-3/4">
+		<div class="flex justify-center">
 
-			<!--image--->
-			<div class="flex">
+		<div class="w-6/12 bg-white p-6 rounded-lg mb-4">
 
-			<img src="/upload/hiquip/{{ $product['product_img'] }}" class="rounded-t-lg h-60 object-cover w-1/3">
-
-			<!---content-->
-			<div class="p-8">
-				<h2 class="text-xl font-extrabold mb-5">
-				{{ $product['name'] }}
-			</h2>
-				<p>{{ $product['description'] }}</p>
-				<p class="text-gray-800 .italic font-thin mt-4">Ksh. {{ $product['price'] }}</p>
-				<button class="bg-blue-500 text-blue-50 rounded-lg py-2 px-4 mt-5">
-					<a href="{{route('cart.add', $product->id)}}">Add to Cart</a>
-				</button>
+			<div class="mb-2">
+				Check Out
 			</div>
 
-		</div>
+			<form action="{{ route('orders.store')}}" method="post">
+				@csrf
 
-			<!--footer--->
-			<footer class="bg-gray-100 rounded-b-lg text-right py-3 px-8 text-xs text-gray-500">Updated {{ $product['updated_at'] }}
-			</footer>
-		</div>
+				<input type="hidden" name="user_id" value="{{auth()->id()}}">
+				<div class="mb-4">
+					<label for="name" class="sr-only">Full name
+					</label>
+					<input type="text" name="name" id="name" placeholder="Full name" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('name')}}">
 
-		</div>
+					@error('name')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>
+				<div class="mb-4">
+					<label for="email" class="sr-only">Email
+					</label>
+					<input type="email" name="email" id="email" placeholder="Email" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('email')}}">
+
+					@error('email')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>	
+				<div class="mb-4">
+					<label for="last_name" class="sr-only">Location
+					</label>
+					<input type="text" name="location" id="last_name" placeholder="Location" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('last_name')}}">
+
+					@error('location')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>
+
+
+				<div class="mb-4">
+					<label for="username" class="sr-only">Phone Number
+					</label>
+					<input type="number" name="phone" id="phone" placeholder="Phone number" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('phone')}}">
+					<small>Format: 07-2456-7890</small>
+
+					@error('phone')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>
+
+				
+			<!--
+				<div class="mb-4">
+					<label for="password" class="sr-only">Password
+					</label>
+					<input type="password" name="password" id="password" placeholder="Choose a password" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="{{ old('password')}}">
+
+					@error('password')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>
+
+				<div class="mb-4">
+					<label for="password_confirmation" class="sr-only">Repeat Password 
+					</label>
+					<input type="password" name="password_confirmation" id="password_confirmation" placeholder="Repaeat your password" class="bg-gray-100 border-2 w-full p-4 rounded-lg" value="">
+
+					@error('password_confirmation')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror	
+
+				</div>-->
+
+				<div>
+					<button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Place Hire Order</button>
+				</div>
+
+			</form>
+		
 
 	</div>
-</div>		
+
+	</div>
+
+	</div>	
+</div>
+
 </body>
 </html>

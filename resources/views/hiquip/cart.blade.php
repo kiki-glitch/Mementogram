@@ -84,18 +84,24 @@
 					<a href="{{ route('register') }}" class="p-3 hover:text-blue-500">Sign up</a>
 				</li>
 				@endguest
+
 				
 				<li>
-					<a href="{{ route('cart.index')}}">
+					<a>
 						<div class="flex flex-row space-x-2">
 						<div>	
 						<i class="fas fa-shopping-cart hover:text-blue-500">
 						</i>
 						</div>
-            			<div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xs px-3 bg-blue-500 text-white rounded-full">{{ \Cart::session(auth()->id())->getContent()->count() }}</div>
+            			<div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xs px-3 bg-blue-500 text-white rounded-full">
+            			@auth
+            				{{ \Cart::session(auth()->id())->getContent()->count() }}
+            			@endauth
+            			</div>
             		</div>
 				</a>
-			</li>
+				</li>
+
 			</ul>
 		</nav>
 
@@ -164,39 +170,121 @@
 
 	<div class="flex-1 p-10 font-bold">
 		
-		<div class="py-24 flex items-center justify-center">
-			
-		<!--card goes here-->
+	
+		<h2 class="mt-6">Your cart</h2>
+	
 
-		<div class="bg-white rounded-lg shadow-2xl w-3/4">
+		
+		<div class="text-center mb-3">
 
-			<!--image--->
-			<div class="flex">
+   			Products
+      </div>
 
-			<img src="/upload/hiquip/{{ $product['product_img'] }}" class="rounded-t-lg h-60 object-cover w-1/3">
 
-			<!---content-->
-			<div class="p-8">
-				<h2 class="text-xl font-extrabold mb-5">
-				{{ $product['name'] }}
-			</h2>
-				<p>{{ $product['description'] }}</p>
-				<p class="text-gray-800 .italic font-thin mt-4">Ksh. {{ $product['price'] }}</p>
-				<button class="bg-blue-500 text-blue-50 rounded-lg py-2 px-4 mt-5">
-					<a href="{{route('cart.add', $product->id)}}">Add to Cart</a>
-				</button>
-			</div>
+   		@if($cartItems->count() > 0)
 
+		<div class="flex flex-col ">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+               Product ID
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Category
+              </th>
+               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Name
+              </th>
+               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Price
+              </th>
+               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Quantity
+              </th>
+    
+              <th scope="col" class="relative px-6 py-3">
+                <span class="">Action</span>
+              </th>
+            </tr>
+          </thead>
+
+        @foreach($cartItems as $item)
+
+          <tbody class="bg-white divide-y divide-gray-200">	
+            <tr>
+             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ $item['id'] }}
+              </td>      
+            
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                	{{ $item['name'] }}
+                </div>
+                
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                	Visuals
+                </div>
+            	</td>
+              
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  
+
+                  {{ \Cart::session(auth()->id())->get($item->id)->getPriceSum()}}
+
+                </div>
+                
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                	<form action="{{ route('cart.update',$item->id) }}" method="post">	
+
+                		@csrf
+
+	                  <input type="number" name="quantity" value="{{ $item -> quantity }}" class="border-2 w-full p-4 rounded-lg">
+	                  <input type="submit" value="save"> 
+
+                  </form>
+                </div>
+                
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <a href="{{ route('cart.destroy', $item->id) }}" onclick="return confirm('Are You Sure You want to Delete Item?')" class="text-red-500 hover:text-red-600">Delete</a>
+              </td>
+            </tr>
+
+            <!-- More items... -->
+          </tbody>
+          @endforeach
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="mt-4 ">
+	Total Price: Ksh.{{ \Cart::session(auth()->id())->getTotal()}}
+</h3>
+
+<a href="{{ route('cart.checkout')}}"><button class="bg-blue-500 text-white px-6 py-3 rounded font-medium">Proceed to Checkout</button></a>
+		@else
+
+		<div class="mt-6 text-center">
+			No Products Added to Cart
 		</div>
+		@endif
 
-			<!--footer--->
-			<footer class="bg-gray-100 rounded-b-lg text-right py-3 px-8 text-xs text-gray-500">Updated {{ $product['updated_at'] }}
-			</footer>
-		</div>
+		
 
-		</div>
-
-	</div>
+	</div> 
 </div>		
 </body>
 </html>

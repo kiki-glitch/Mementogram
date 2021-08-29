@@ -84,8 +84,19 @@
 					<a href="{{ route('register') }}" class="p-3">Sign up</a>
 				</li>
 				@endguest
-				
-				<li><a><i class="fas fa-shopping-cart"></i></a></li>
+
+				<li>
+				<a href="{{ route('cart.index')}}">
+						<div class="flex flex-row space-x-2">
+						<div>	
+						<i class="fas fa-shopping-cart hover:text-blue-500">
+						</i>
+						</div>
+            			<div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-xs px-3 bg-blue-500 text-white rounded-full">{{ \Cart::session(auth()->id())->getContent()->count() }}</div>
+            		</div>
+				</a>
+				</li>
+
 			</ul>
 		</nav>
 
@@ -116,62 +127,22 @@
 					</form>
 		</nav>
 	</div>
-		<!--content-->
-  	<!--
-		<div class="container mb-5 mt-5">
-			<div class="row">-->
-			
-			<!--Cards--->
-			<!--
-			<div class="col-md-4">
-				<div class="card mt-3">
-					<div class="product-1 align-items-center p-2 text-center">
-						<img src="/upload/hiquip/Boom pole.jpg" alt="" class="rounded" width="160">
-						<h5>Boom Play</h5>-->
-						<!--card-info--->
-						<!--
-						<div class="mt-3 info">
-							<span class="text1 d-block">Lorem ipsum sit amet.</span>
-							<span class="text1">
-								Lorem ipsum dolor 
-							</span>
-						</div>
-					<div class="cost mt-3 text-dark">
-						<span>Ksh.3000</span>
-						<div class="star mt-3 align-items-center">
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
 
-						</div>
-					</div>
-					</div>
-					-->
-					<!---button-->
-					<!--
-					<div class="p-3 shoe text-center text-white mt-3 cursor">
-						<span class="text-uppercase">Add to cart</span>
-					</div>
-				</div>
-			</div>-->
-			<!--card 1 ends here-->
-		<!--</div>
-		</div>
-	</div>	-->
+	
+		<!--content-->
+
 	<div class="hiquip_content">
 	<div class="hiquip_container">
+		@foreach($products as $product)
 		<div class="card">	
 			<div class="imgBx">
-				<img src="/upload/hiquip/camera.jpg" alt="">
+				<img src="/upload/hiquip/{{ $product['product_img'] }}" alt="">
 				<ul class="action">
 				  <li>
 				  <i class="fas fa-shopping-cart"></i><span>Add to Cart</span>
 				  </li>
 				  <li>
-				  <a href="{{ route('hiquip.product') }}"><i class="fas fa-eye"></i><span>View</span></a>
+				  <a href="{{"/hiquip/product/productid/".$product['id'] }}"><i class="fas fa-eye"></i><span>View</span></a>
 				  </li>
 				  <li><i class="far fa-heart"></i>
 				  	<span>Add to Wishlist</span>
@@ -180,10 +151,10 @@
 			</div>
 		<div class="content">
 			<div class="productName">
-				<h3>Camera</h3>
+				<h3>{{ $product['name'] }}</h3>
 			</div>
 			<div class="price_rating">
-				<h2>Ksh.5,000</h2>
+				<h2>Ksh.{{ $product['price'] }}</h2>
 				<div class="rating">
 					<i class="fas fa-star"></i>
 							<i class="fas fa-star"></i>
@@ -193,184 +164,22 @@
 							<i class="fas fa-star-half-alt"></i>
 				</div>
 			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/video_lighting.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Video Lighting</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.20,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
+			<div>
+				<button class="bg-blue-500 text-blue-50 rounded-lg py-2 px-4 w-full">
+					<a href="{{route('cart.add', $product->id)}}">Add to Cart</a>
+				</button>
 			</div>
 		</div>
 		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/Boom pole.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Boom Pole</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.15,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
-			</div>
-		</div>
-		</div>
+		@endforeach
 		
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/camera.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Camera</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.5,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star grey"></i>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/video_lighting.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Video Lighting</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.20,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/Boom pole.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Boom Pole</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.15,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/camera.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Camera</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.5,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/video_lighting.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Video Lighting</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.20,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star grey"></i>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="card">	
-			<div class="imgBx">
-				<img src="/upload/hiquip/Boom pole.jpg" alt="">
-			</div>
-		<div class="content">
-			<div class="productName">
-				<h3>Boom Pole</h3>
-			</div>
-			<div class="price_rating">
-				<h2>Ksh.15,000</h2>
-				<div class="rating">
-					<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star-half-alt"></i>
-				</div>
-			</div>
-		</div>
-		</div>
+		
 	</div>
 </div>
 
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src=" {{ mix('js/app.js') }}"></script>
+
 
 </body>
 </html>

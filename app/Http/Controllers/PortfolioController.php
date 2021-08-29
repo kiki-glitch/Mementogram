@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Portfolio;
 use App\Models\SocialLinks;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Session;
