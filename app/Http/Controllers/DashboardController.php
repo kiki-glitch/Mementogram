@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Products;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
@@ -17,14 +20,22 @@ class DashboardController extends Controller
     }
     public function index(){
 
-       // $user = auth()->user();
+       $user = auth()->user();
         
         if(Auth::user()->hasRole('user'))
         {
-        return view('dashboard');
+        return view('dashboard')->withUser('user');
         }
         elseif(Auth::user()->hasRole('admin')){
-            return view('admin.admin');
+            $users = User::count();
+            //$orders = Order::sum('grand_total');
+           //$orders = Order::where('is_paid', '1')->sum('grand_total');
+            $orders = Order::where('is_paid', '1');
+    
+            return view('admin.admin',compact('users'))->with(['orders'=> $orders]);
+        }
+        else{
+            return view('dashboard');
         }
     }
     public function userportfolio(){

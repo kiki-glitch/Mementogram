@@ -19,6 +19,10 @@ return [
         ], 
         'user' => [
             'profile' => 'r,u',
+        ],
+        'brand' => [
+            
+            'profile' => 'r,u'
         ]
     ],
 

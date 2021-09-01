@@ -25,7 +25,8 @@ class RegisterController extends Controller
             'last_name'=> 'required|max:255', 
              'username'=> 'required|max:255',
               'email'=> 'required|email|unique:users|max:255',
-              'password'=> 'required|confirmed' 
+              'password'=> 'required|confirmed',
+              'role_id'=>'required'
 
             ]);     
         //store user
@@ -37,7 +38,7 @@ class RegisterController extends Controller
             'password'=> Hash::make($request->password),
         ]);
 
-       $user->attachRole('user');
+       $user->attachRole($request->role_id);
 
         auth()->attempt($request->only('email','password'));
 

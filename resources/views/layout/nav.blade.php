@@ -16,21 +16,33 @@
 	<!-----CSS----->
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-	
-
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/hiquip.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/portfolio.css') }}">
 	<!--Tailwind css-->
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<script src="https://kit.fontawesome.com/8d7466dea7.js" crossorigin="anonymous"></script>
+
+	 <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> <!--Totally optional :) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
 	<!--
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 	
+	<style>
+.dropdown:focus-within .dropdown-menu {
+  opacity:1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+</style>
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
 
 </head>
 <body class="bg-gray-100">
-		<nav class="p-6 bg-white flex justify-between">
+		<nav class="p-6 bg-white flex justify-between ">
 			<ul class="flex items-center">
 				<li>
 					<a href="/" class="p-3 hover:text-blue-500">Home</a>

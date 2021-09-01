@@ -11,11 +11,10 @@
 
 			@if(session('msg'))
 
-				<div class="py-2 mb-2 text-white-500 mt-2 text-lg">
-							
-					{{session('msg')}}
-
-				</div>
+				<div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+					  
+					  <p>{{session('msg')}}</p>
+					</div>
 				@endif
 			<div>
 				<h1 class="font-bold text-4xl tracking-wide">Contact </h1>

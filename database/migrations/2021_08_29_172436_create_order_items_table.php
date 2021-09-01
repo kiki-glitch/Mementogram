@@ -15,11 +15,14 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
 
+            
             $table->id();
-
-             $table->foreignId('order_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-             $table->foreignId('product_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-
+            //$table->unsignedBigInteger('order_id')->change();
+            //$table->unsignedBigInteger('product_id');
+             $table->foreignId('order_id')->constrained('orders')->onUpdate('cascade')->onDelete('cascade')->change();
+             $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade')->change();
+            /*$table->foreign('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreign('product_id')->constrained('products')->onDelete('cascade');*/
             $table->float('price');
             $table->integer('quantity');
             

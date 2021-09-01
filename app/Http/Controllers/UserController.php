@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Enquiry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 //use Intervention\Image\Facades\Image;
@@ -86,11 +87,11 @@ class UserController extends Controller
             $request->session()->flash('success', 'Your details have now been updated!');
             return redirect()->back();
         }else{
-            return redirect->back();
+            return redirect()->back();
         }
 
         }else{
-            return redirect->back();
+            return redirect()->back();
         }
     }
 
@@ -228,5 +229,15 @@ class UserController extends Controller
         }
     }
 
+    public function message_view($id){
+
+    $messages = Enquiry::where('recepient_id', '=', $id)->get();
+    return view('user.messageview',['messages'=> $messages]);
+    }
+    public function message_sent($id){
+
+    $messages = Enquiry::where('sender_id', '=', $id)->get();
+    return view('user.message_sent',['messages'=> $messages]);
+    }
     
 }

@@ -143,8 +143,11 @@ body{
 	display: inline-block;
 
 }
-
-.grid-view .view_item .vi_left{
+.grid-view .view_item img{
+	width: 100px;
+	
+}
+ .view_item .vi_left{
 	margin-bottom: 10px;
 }
 

@@ -274,7 +274,10 @@
 	Total Price: Ksh.{{ \Cart::session(auth()->id())->getTotal()}}
 </h3>
 
+<div class="mb-4">
 <a href="{{ route('cart.checkout')}}"><button class="bg-blue-500 text-white px-6 py-3 rounded font-medium">Proceed to Checkout</button></a>
+</div>
+<a href="{{ route('hiquip')}}" class="text-blue-500 underline hover:text-blue-300">Continue shoppping</a>
 		@else
 
 		<div class="mt-6 text-center">

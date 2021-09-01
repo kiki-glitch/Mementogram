@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Products;
 use App\Models\Order;
+use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Image;
 use File;
 use Session;
@@ -73,11 +75,12 @@ class HiquipController extends Controller
     }
     public function checkout_order(Request $request){
 
-         $this->validate($request,
+        $checkout = $this->validate($request,
             ['name'=> 'required|max:255',
             'phone'=> 'required|regex:/(07)[0-9]{8}/', 
              'location'=> 'required|max:255',
               'email'=> 'required|email|max:255',
+              'payment_method' =>'required',
             ]);     
 
          $order = new Order();
@@ -86,8 +89,8 @@ class HiquipController extends Controller
        $order->phone_number =$request->input('name');
        $order->location = $request->input('location');
        $order->email = $request->input('email');
-        
-
+       $order->payment_method = $request->input('payment_method');
+       
        $order->grand_total = \Cart::session(auth()->id())->getTotal();
        $order->item_count = \Cart::session(auth()->id())->getContent()->count();
        $order->user_id = auth()->id();
@@ -102,16 +105,34 @@ class HiquipController extends Controller
             $order->items()->attach($item->id, ['price'=> $item->price, 'quantity'=> $item->quantity ]);
         }
 
+
+
+        //payment
+       /* if($request->input('payment_method') == 'mpesa'){
+
+            return redirect()->route('mpesa.checkout');
+        }*/
+        //send email to customer
+        if($order->save() == true){
+            $recepient_email = $request->email;
+
+            Mail::to($request->email)->send(new OrderMail($checkout));
+            Session::flash('msg','Order successful');
+            
+        }else{
+            echo "Error";
+            
+        }
         //empty cart
          \Cart::session(auth()->id())->clear();
 
-        //send email to customer
+        
 
-        //take user to thank you
+        /*take user to thank you
 
-        return "order completed,thak you for order"
+        return "order completed,thak you for order";*/
 
-       // return redirect()->back();*/
+       return redirect()->route('hiquip');
         
     }
 

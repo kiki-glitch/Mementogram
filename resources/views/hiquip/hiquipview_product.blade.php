@@ -103,13 +103,13 @@
 		<div class="relative min-h-screen flex">
 
 	<!--sidebar-->
-	<div class="w-64 h-screen bg-gray-900 rounded-md overflow-y-scroll ">
+	<div class="w-64 h-screen bg-gray-900 rounded-md sticky top-0 overflow-y-scroll ">
 	
 	<nav>
 	<div class="">
 		<div class="pc-6 pt-8">
 		<div class="flex items-center justify-between">
-			<a href="#" class="bg-blue-600 p-1.5 rounded flex items-center justify-center">Mementogram</a>
+			<a href="#" class="pt-4 pb-4 text-lg font-semibold tracking-widest text-gray-500 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Mementogram</a>
 			
 			<button class="flex items-center justify-center p-8.5 rounded bg-gray-800"><i class="fas fa-arrow-left"></i></button>
 		</div>	

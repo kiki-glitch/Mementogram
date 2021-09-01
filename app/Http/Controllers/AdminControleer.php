@@ -9,10 +9,12 @@ use App\Models\Role;
 use App\Models\Portfolio;
 use App\Models\Products;
 use App\Models\SocialLinks;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+//use Illuminate\Support\Facades\DB;
 use Session;
 use DB;
 
@@ -92,7 +94,7 @@ class AdminControleer extends Controller
 
         $user = Auth::user();
         //$products = Proucts::withTrashed()->paginate(5);
-        $products = Products::paginate(5);
+        $products = Products::withTrashed()->paginate(5);
         $trashes = Products::paginate(5);
         return view('admin.hiquipview',['products'=>$products],['trashes'=>$trashes])->withUser($user);
     }
@@ -322,6 +324,120 @@ class AdminControleer extends Controller
         $socials->forceDelete();
 
         Session::flash('msg','Social Link Permanently Deleted');
+        return redirect()->back();
+    }
+
+    /*Hiquip*/
+
+     public function orderView(){
+
+        $user = Auth::user();
+        $orders = Order::paginate(10);
+        return view('admin.orderview',['orders'=>$orders])->withUser($user);
+    }
+    public function orderitemsView(){
+
+        $user = Auth::user();
+        $orders = $users = DB::table('order_items')->paginate(10);
+        return view('admin.orderitemsView',['orders'=>$orders])->withUser($user);
+    }
+    public function order_delete($id){
+
+        $orders = Order::findOrFail($id);
+        $orders->delete();
+
+        Session::flash('msg','Order Deleted');
+        return redirect()->back();
+    }
+
+     public function edit_hiquip($id){
+
+        $user = Auth::user();
+        $products = Products::findOrFail($id);
+        return view('admin.admin_editProduct',['products'=>$products])->withUser($user);
+    }
+    public function editproduct(Request $request){
+
+        $users = Auth::user();
+
+        $this->validate($request,
+            ['product_name'=> 'required|max:255',
+            'category'=> 'required|max:255', 
+             'description'=> 'required',
+              'price'=> 'required|integer', 
+
+            ]); 
+        if($request->hasFile('product_img')){
+            $product_img = $request->file('product_img');
+            $filename = time() . '.' . $product_img->getClientOriginalExtension();
+            Image::make($product_img)->resize(400,400)->save( public_path('/upload/hiquip/' . $filename ) );
+
+        }
+
+        $products = Products::findOrFail($request->id);
+        
+       // $products->product_img= $filename;
+        $products->name= $request->product_name;
+        $products->category= $request->category;
+        $products->description=$request->description;
+        $products->price = $request->price;
+        $products->save();
+
+        Session::flash('msg','Product updated successfully');
+        return redirect()->back();
+    }
+    public function edit_order($id){
+
+        $user = Auth::user();
+        $orders = Order::findOrFail($id);
+        return view('admin.editOrder',['orders'=>$orders])->withUser($user);
+    }
+     public function update_order(Request $request){
+
+        $users = Auth::user();
+
+        $this->validate($request,
+            ['id'=> 'required',
+            'is_paid'=> 'required', 
+             'is_returned'=> 'required',
+              'payment_method'=> 'required',
+              'status'=>'required', 
+
+            ]); 
+        $orders = Order::findOrFail($request->id);
+        
+       // $products->product_img= $filename;
+        $orders->is_returned= $request->is_returned;
+        $orders->is_paid= $request->is_paid;
+        $orders->payment_method=$request->payment_method;
+        $orders->status = $request->status;
+        $orders->save();
+
+        Session::flash('msg','Order updated successfully');
+        return redirect()->back();
+    }
+   
+     public function restore_hiquip($id){
+
+        $products = Products::withTrashed()->findOrFail($id);
+        $products->restore();
+
+        Session::flash('msg','Product successfully Restored');
+        return redirect()->back();
+    }
+    public function disable_hiquip($id){
+        $products = Products::findOrFail($id);
+        $products->delete();
+
+        Session::flash('msg','Product Disabled');
+        return redirect()->back();
+    }
+    public function delete_hiquip($id){
+
+        $products = Products::onlyTrashed()->findOrFail($id);
+        $products->forceDelete();
+
+        Session::flash('msg','Product Permanently Deleted');
         return redirect()->back();
     }
 }

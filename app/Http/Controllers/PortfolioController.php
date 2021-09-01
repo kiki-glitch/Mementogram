@@ -31,33 +31,35 @@ class PortfolioController extends Controller
 
             ]);   
 
-        $newImageName = time() .  '.' . $request->portfolio_file->extension();
+       // $newImageName = time() .  '.' . $request->portfolio_file->extension();
 
-        $request->portfolio_file->move(public_path('upload/portfolios/'), $newImageName);
+        //$request->portfolio_file->resize(400,400)->move(public_path('upload/portfolios/'), $newImageName);
 
         
 
-       /* if($request->hasFile('portfolio_file')){
+       if($request->hasFile('portfolio_file')){
             $portfolio_file = $request->file('portfolio_file');
             $filename = time() . '.' . $portfolio_file->getClientOriginalExtension();
             Image::make($portfolio_file)->resize(300,300)->save( public_path('/upload/portfolios/' . $filename ) );
             
+            $portfolio = new Portfolio;
             $portfolio->media = $filename;
             $portfolio->user_id= $request->user_id;
             $portfolio->description = $request->description;
-            $portfolio->save();*/
+            $portfolio->save();
 
-         $portfolio = Portfolio::create([
+        /* $portfolio = Portfolio::create([
             'user_id'=> $request->user_id,
             'media'=> $newImageName,
             'description'=> $request->description,
             
             
-        ]);
+        ]);*/
         $request->session()->flash('success2', 'Your Portfolio has been successfully added!');
          return redirect()->back();
 
         }
+    }
     
     public function socials(Request $request){
 

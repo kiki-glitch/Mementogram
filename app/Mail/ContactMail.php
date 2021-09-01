@@ -31,7 +31,7 @@ class ContactMail extends Mailable
     public function build()
     {
         //define our subject line
-        $subject = $this->data['name'] .'Send a Message on'.$this->data['subject'];
+        $subject = $this->data['name'] . 'Send a Message on' .$this->data['subject'];
 
         
         return $this->markdown('emails.contactMail')->subject($subject)->with([

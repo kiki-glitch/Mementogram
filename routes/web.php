@@ -29,7 +29,7 @@ Route::get('/contact/success/')->name('contact.success');
 Route::post('/contact/', [ContactController::class, 'contact_form_save'])->name('contact.save');
 
 
-Route::get('/hiquip/', [HiquipController::class, 'hiquipview'])->name('hiquip');
+Route::get('/hiquip/', [HiquipController::class, 'hiquipview'])->name('hiquip')->middleware('auth');
 Route::get('/hiquip/product/productid/{id}/', [HiquipController::class, 'hiquipview_product'])->name('hiquip.product');
 Route::get('/hiquip/add_to_cart/{product}/', [HiquipController::class, 'add_to_cart'])->name('cart.add')->middleware('auth');
 Route::get('/hiquip/cart/', [HiquipController::class, 'cart'])->name('cart.index')->middleware('auth');
@@ -46,7 +46,15 @@ Route::get('/admin/user/portfolios/', [AdminControleer::class, 'portfolios_view'
 Route::get('/admin/user/social links/', [AdminControleer::class, 'sociallinks_view'])->name('usersocials.view');
 Route::get('/admin/hiquip/view/', [AdminControleer::class, 'hiquip_view'])->name('admin.hiquip_view');
 Route::get('/admin/add product/view/', [AdminControleer::class, 'addproduct_view'])->name('add_product');
+
+Route::get('/admin/hiquip/edit/{id}', [AdminControleer::class, 'edit_hiquip'])->name('admin.edit_hiquip');
+Route::get('/admin/hiquip/restore/{id}', [AdminControleer::class, 'restore_hiquip'])->name('admin.restore_hiquip');
+Route::get('/admin/hiquip/disable/{id}', [AdminControleer::class, 'disable_hiquip'])->name('admin.disablehiquip');
+Route::get('/admin/hiquip/delete/{id}', [AdminControleer::class, 'delete_hiquip'])->name('admin.delete_hiquip');
+
 Route::post('/admin/add product/', [AdminControleer::class, 'addproduct'])->name('add.product');
+Route::post('/admin/edit product/', [AdminControleer::class, 'editproduct'])->name('edit.product');
+
 Route::get('/admin/reset/password/user/{id}/', [AdminControleer::class, 'passwordEdit'])->name('userpassword.edit');
 Route::post('/admin/edit/password/user/', [AdminControleer::class, 'passwordUpdate'])->name('userpasswordChange.update');
 Route::get('/admin/delete/password/user/{id}/', [AdminControleer::class, 'user_delete'])->name('user.softdelete');
@@ -64,21 +72,32 @@ Route::get('/admin/permanent/delete/portfolio/user/{id}/', [AdminControleer::cla
 Route::post('/admin/add/user', [AdminControleer::class, 'add_user'])->name('add.user');
 Route::post('/admin/edit/useravatar', [AdminControleer::class, 'edit_useravatar'])->name('admin.user.avatarupdate');
 Route::post('/admin/edit/user_description', [AdminControleer::class, 'edit_user_description'])->name('admin.user.user_description');
+Route::get('/admin/order/view', [AdminControleer::class, 'orderView'])->name('admin.orders_view');
+Route::get('/admin/order_items/view', [AdminControleer::class, 'orderitemsView'])->name('admin.orderitems_view');
+Route::get('/admin/edit/order/{id}/', [AdminControleer::class, 'edit_order'])->name('order.edit');
+Route::post('/admin/update/order', [AdminControleer::class, 'update_order'])->name('order.update');
+Route::get('/admin/delete/order/{id}/', [AdminControleer::class, 'order_delete'])->name('order.delete');
 
 
-
-
-Route::get('/profile/', [UserController::class, 'profile'])->name('user.profile');
-Route::get('/portfolio', [UserController::class, 'userportfolio'])->name('portfolio');
 
 Route::get('/portfoliohub/', [PortfolioHubController::class, 'userportfolio'])->name('portfoliohub');
 Route::get('/portfoliohub/view/user/{id}/', [PortfolioHubController::class, 'portfoliohub_view'])->name('portfoliohub.view');
 
+Route::get('/portfoliohub/industry/sports/', [PortfolioHubController::class, 'industry_sports'])->name('industry.sports');
+Route::get('portfoliohub/industry/clothes/', [PortfolioHubController::class, 'industry_clothes'])->name('industry.clothes');
+Route::get('/portfoliohub/industry/car/', [PortfolioHubController::class, 'industry_cars'])->name('industry.car');
+Route::get('/portfoliohub/industry/music', [PortfolioHubController::class, 'industry_music'])->name('industry.music');
+
+Route::get('/portfoliohub/', [PortfolioHubController::class, 'userportfolio'])->name('portfoliohub');
+Route::get('/portfoliohub/', [PortfolioHubController::class, 'userportfolio'])->name('portfoliohub');
+Route::get('/search/', [PortfolioHubController::class, 'search_user'])->name('portfoliohub.search_user');
+Route::get('/search/user/location/', [PortfolioHubController::class, 'searchby_location'])->name('portfoliohub.searchbylocation_user');
+Route::get('/search/user/industry/', [PortfolioHubController::class, 'searchby_industry'])->name('portfoliohub.searchbyindustry_user');
+
+
+
 Route::post('/portfolio/submit', [PortfolioController::class, 'add'])->name('media.portfolio');
 Route::post('/portfolio/submit/socials', [PortfolioController::class, 'socials'])->name('media.links');
-
-
-
 Route::get('/portfolio/view/', [PortfolioController::class, 'portflio_view'])->name('portfolio.view');
 Route::get('/portfolio/edit/{id}/', [PortfolioController::class, 'portflio_edit'])->name('portfolio.edit');
 Route::get('/portfolio/disable/{id}/', [PortfolioController::class, 'portflio_delete'])->name('portfolio.delete');
@@ -94,19 +113,16 @@ Route::post('/portfolio/socials/update/socials/', [PortfolioController::class, '
 
 Route::get('/portfolio/view/edit/', [PortfolioController::class, 'portflio_edit'])->name('portfolio.edit');
 
-
+Route::get('/profile/', [UserController::class, 'profile'])->name('user.profile');
+Route::get('/portfolio', [UserController::class, 'userportfolio'])->name('portfolio');
 Route::get('/edit/user/', [UserController::class, 'edit'])->name('user.edit');
-
-
-
-
-
 Route::post('/edit/user/avatar/', [UserController::class, 'update_avatar'])->name('user.avatarupdate');
 Route::post('/edit/user/profile', [UserController::class, 'update'])->name('user.update');
 Route::post('/portfolio/view/edit/description', [UserController::class, 'description_update'])->name('user.description_update');
 Route::get('/edit/password/user/', [UserController::class, 'passwordEdit'])->name('password.edit');
 Route::post('/edit/password/user/', [UserController::class, 'passwordUpdate'])->name('passwordChange.update');
-
+Route::get('/messages/received/view/{id}', [UserController::class, 'message_view'])->name('user.message_view');
+Route::get('/messages/sent/view/{id}', [UserController::class, 'message_sent'])->name('user.message_sent');
 
 Route::get('/forgot-password', function () {
     return view('auth.passwords.request');
@@ -157,10 +173,16 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 Route::post('/register', [RegisterController::class, 'store']);
 
+/*Route::get('/', function () {
+  return view('admin.statistics_dashboard');
+})->name('home');*/
 Route::get('/', function () {
-  return view('layout.sidebar');
+  return view('posts.home');
 })->name('home');
 
 

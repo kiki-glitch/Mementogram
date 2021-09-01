@@ -65,7 +65,24 @@
 					@enderror	
 
 				</div>
+				<div class="mb-4">
+					<label for="role_id" class="sr-only">Role
+					</label>
+					<select name="role_id" id="role_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg">
+						<option  selected disabled >Register as </option>
+						<option value="user">Content-Creator User</option>
+						<option value="brand">Brand/Company</option>
+						
+					</select>
 
+					@error('role_id')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror
+					</div>	
 				<div class="mb-4">
 					<label for="password" class="sr-only">Password
 					</label>

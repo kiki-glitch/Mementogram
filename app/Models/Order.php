@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'name',
         'user_id',
@@ -22,6 +23,7 @@ class Order extends Model
 
     public function items(){
 
-        return $this->belongsToMany(Products::class, 'order_items','order_id','product_id');
+        return $this->belongsToMany(Products::class, 'order_items','order_id','product_id')->withTimestamps();
+        
     }
 }

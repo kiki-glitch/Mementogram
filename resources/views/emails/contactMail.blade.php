@@ -4,9 +4,9 @@
 <b>Email</b> {{ $data['email']}}<br/>
 <b>Phone</b> {{ $data['phone']}}<br/>
 <b>Subject</b> {{ $data['subject']}}<br/>
-<b>Message</b> {{ $data['form_message']}}<br/>
 
-The body of your message.
+
+ {{ $data['form_message']}}<br/>
 
 @component('mail::button', ['url' => 'mailto:'.$data['email']])
 Reply to {{ $data['name']}}

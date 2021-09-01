@@ -104,34 +104,80 @@
 <div class="relative min-h-screen flex">
 
 	<!--sidebar-->
-	<div class="bg-gray-500 text-black-100 w-64 space-y-6 px-4">
-	<!--logo-->
-		
-
-		<a href="" class="text-white flex items-center space-x-2">
-			logo
-		</a>
-
-		<span class="text-2xl">Mementogram</span>
-
-	<!--nav-->
-
-		<nav>
-			<a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Camera</a>
-			<a href="{{ route('portfolios.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400"> Sound Equip</a>
-			<a href="{{ route('usersocials.view')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-red-400">Microphone</a>
+	<div class="w-64 h-screen bg-gray-900 rounded-md sticky top-0 overflow-y-scroll ">
+	
+	<nav>
+	<div class="">
+		<div class="pc-6 pt-8">
+		<div class="flex items-center justify-between">
+			<a href="#" class="pt-4 pb-4 text-lg font-semibold tracking-widest text-gray-500 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Mementogram</a>
 			
-			<form action="{{ route('logout') }}" method="post" class="p-3 inline">
-						@csrf
-						<button type="submit" class="block py-2.5 px-4" >Logout</button>
-					</form>
-		</nav>
+			<button class="flex items-center justify-center p-8.5 rounded bg-gray-800"><i class="fas fa-arrow-left"></i></button>
+		</div>	
+
+	</div>
+	<div class="px-6 pt-4">
+		
 	</div>
 
+	<div class="px-6 pt-4 ">
+		<hr class="border-gray-700">
+	</div>
+	<div class="px-6 pt-4">
+
+		<ul class="flex flex-col space-y-2 ">
+			<li class="relative text-gray-500 hover:text-white focus-within:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-camera w-5 h-5 stroke-current"></i></div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2 rounded text-xs hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:bg-gray-800">Camera</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					
+					<i class="fas fa-video h-5 stroke-current"></i></div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2  rounded text-xs hover:bg-gray-800">Video</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-microphone w-5 h-5 stroke-current"></i>
+
+				</div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2 rounded text-xs hover:bg-gray-800">Sound</a>
+			</li>
+			<li class="relative text-gray-500 hover:text-white">
+				<div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+					<i class="fas fa-box w-5 h-5 stroke-current"></i>
+				</div>
+					<a href="#" class="inline-block w-full pl-8 pr-4 py-2  rounded text-xs hover:bg-gray-800">Packages</a>
+			</li>				
+		</ul>
+	</div>
+	
+	</div>
+
+</nav>
+	
+
+			<!--end of navbar-->
+
+</div>
 	
 		<!--content-->
+		<div clss="w-full min-h-screen bg-blue-50 p-6">
+			<h1 class="font-bold text-xl text-center">
+				Products
 
+				@if(session('msg'))
+			<div class="flex justify-center bg-green-200 rounded py-2 mb-2 text-green-500 mt-2 text-sm ">
+							
+					{{session('msg')}}
+
+				</div>
+		@endif
+			</h1>
+			
 	<div class="hiquip_content">
+			
 	<div class="hiquip_container">
 		@foreach($products as $product)
 		<div class="card">	
@@ -178,6 +224,7 @@
 </div>
 
 
+</div>
 </div>
 
 

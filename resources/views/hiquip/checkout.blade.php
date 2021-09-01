@@ -242,7 +242,26 @@
 
 				</div>
 
-				
+				<div class="mt-4">
+			  <span class="text-gray-700">Account Type</span>
+			  <div class="mt-2">
+			    <label class="inline-flex items-center">
+			      <input type="radio" class="form-radio" name="payment_method" value="cash">
+			      <span class="ml-2">Cash on delivery</span>
+			    </label>
+			    <label class="inline-flex items-center ml-6">
+			      <input type="radio" class="form-radio" name="payment_method" value="mpesa">
+			      <span class="ml-2">Mpesa</span>
+			    </label>
+			  </div>
+			</div>
+			@error('payment_method')
+						<div class="text-red-500 mt-2 text-sm">
+							
+							{{ $message }}
+							
+						</div>
+					@enderror
 			<!--
 				<div class="mb-4">
 					<label for="password" class="sr-only">Password
