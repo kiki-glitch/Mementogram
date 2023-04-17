@@ -12,7 +12,7 @@ Clone the repository..
     
 Cloning from a specific branch
 
-     git clone --single-branch --branch develop https://github.com/HPLAB/recruitment-project.git
+     git clone --single-branch --branch develop https://github.com/Mementogram.git
     
 Switch to the repo folder
 
