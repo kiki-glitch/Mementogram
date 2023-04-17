@@ -8,15 +8,15 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository..
 
-    git clone https://github.com/Mementogram.git
+    git clone https://github.com/kiki-glitch/Mementogram.git
     
 Cloning from a specific branch
 
-     git clone --single-branch --branch develop https://github.com/Mementogram.git
+     git clone --single-branch --branch develop https://github.com/kiki-glitch/Mementogram.git
     
 Switch to the repo folder
 
-    cd recruitment-project
+    cd Mementogram
 
 Install all the dependencies using composer
 
